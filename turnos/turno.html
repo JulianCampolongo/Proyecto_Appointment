@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="turno.css">
+    
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Cargar sucursal</title>
+    
+</head>
+
+
+<body>
+    <script src="data.js"></script>
+    <div class="header">
+    <header>
+        
+        <nav class="menu">
+            <ul>
+                <li><a href=""><i class="fas fa-cut"> ¿Que es Appointment?</i></a></li>
+                <li><a href=""><i class="fas fa-home"></i> Contactanos</a></li>
+                <li><a href=""><i class="fas fa-headset"></i> Ayuda en linea</a></li>
+                <li><a href=""><i class="fas fa-sign-in-alt"></i> Ingresar/Login</a></li>
+                    
+            </ul>
+        </nav>
+    </header>
+</div>
+
+
+</div>
+   
+    <form class=formTurnos name="sucursal" actions="">
+       <div>
+            <h2>¡SOLICITAR TURNO!</h2>
+        
+        <input type="text" id="date" name="appointment_date" placeholder="fecha de turno" required>
+        <input type="text" id="first_name" name="first_name" placeholder="nombre" required>
+        <input type="text" id="last_name" name="last_name" placeholder="apellido" required>
+        <input type="number" id="promo_code" name="promo_code" placeholder="codigo promocional" required>
+         
+        <form name="sucursal" action="#">
+			<select id="branches" class="seleccion" name="branchName" placeholder="Sucursal" onchange="setStylists()">
+						
+			</select>
+			
+			<select id="stylists" class="seleccion" name="stylists">
+		
+			</select>
+			
+		</form>
+		
+		<script type="text/javascript">
+            function removeOptions(selectElement) {
+                var i, L = selectElement.options.length - 1;
+                for(i = L; i >= 0; i--) {
+                    selectElement.remove(i);
+                }
+            }
+            
+            function setSucursales(){
+
+                console.log(apiData)
+
+                for (var i = 0; i < apiData.branches.length; i++) {
+                    var select = document.getElementById("branches");
+                    var option = document.createElement("option");
+                    option.text = apiData.branches[i].branchName;
+                    option.value = apiData.branches[i].branch_id;
+                    select.add(option);
+                }
+
+            } 
+            setSucursales()
+		
+			function setStylists(){
+                
+                removeOptions(document.getElementById('stylists'));
+
+                console.log(apiData)
+				var branch_id = document.getElementById("branches").value
+                console.log(branch_id)
+				 
+				var stylists = apiData.branches.find(item => item.branch_id == branch_id)?.stylists
+                console.log(stylists)
+                
+                for (var i = 0; i < stylists.length; i++) {
+                    var select = document.getElementById("stylists");
+                    var option = document.createElement("option");
+                    option.text = stylists[i].stylistName;
+                    option.value = stylists[i].stylist_id;
+                    select.add(option);
+                }
+                
+			}         
+			
+                
+			
+		
+		</script>
+			
+		
+
+        
+		
+		
+        
+
+        
+       
+        <input class="enviar" id="formButton" type="submit" value="SOLICITAR TURNO">
+    </form>
+</div> 
+    
+
+    <h1>¡Registrate en Appointment y </h1>
+    <h1>hace crecer tu Barberia! </h1>
+    <script src="./cambia.js"></script>
+</body>
+
+</html>
